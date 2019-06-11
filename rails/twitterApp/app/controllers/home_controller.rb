@@ -91,7 +91,7 @@ class HomeController < ApplicationController
   private
   def set_login_user
     if user_signed_in?
-      @user = User.find(current_user.id)
+      @user = User.with_readonly{ User.find(current_user.id) }
     else
       redirect_to '/users/sign_up'
     end
